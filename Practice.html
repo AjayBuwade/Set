@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhabha University Placement Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Welcome to Bhabha University Placement's Cell</h1>
+  </header>
+
+  <!-- Toggle Buttons -->
+  <div class="toggle-buttons">
+    <button onclick="showForm('login')">Student Login</button>
+    <button onclick="showForm('admin')">Admin Login</button>
+    <button onclick="showForm('signup')">College Manegement</button>
+   
+  </div>
+
+  <div class="form-container">
+
+    <!-- Student Signup Form -->
+    <form class="form-box" id="signupForm">
+      <h2>Student Signup</h2>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="text" placeholder="Roll Number" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Signup</button>
+    </form>
+
+    <!-- Student Login Form -->
+    <form class="form-box" id="loginForm" style="display: none;">
+      <h2>Student Login</h2>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Admin Login Form -->
+<form class="form-box" id="adminForm" onsubmit="return adminLogin(event)">
+  <h2>Admin Login</h2>
+  <input type="text" id="adminUsername" placeholder="Admin Username" required />
+  <input type="password" id="adminPassword" placeholder="Password" required />
+  <button type="submit">Login</button>
+</form>
+
+  </div>
+
+<script>
+  function showForm(formType) {
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('adminForm').style.display = 'none';
+
+    if (formType === 'signup') {
+      document.getElementById('signupForm').style.display = 'block';
+    } else if (formType === 'login') {
+      document.getElementById('loginForm').style.display = 'block';
+    } else if (formType === 'admin') {
+      document.getElementById('adminForm').style.display = 'block';
+    }
+  }
+
+  // ✅ This should be outside the function
+  window.onload = function () {
+    showForm("login"); // You can change to "signup" or "admin" if you want
+  };
+</script>
+
+<script>
+  function adminLogin(event) {
+    event.preventDefault(); // Stop default submit behavior
+
+    const username = document.getElementById("adminUsername").value;
+    const password = document.getElementById("adminPassword").value;
+
+    // Hardcoded login (can be made dynamic later)
+    if (username === "admin" && password === "admin123") {
+      localStorage.setItem("isAdminLoggedIn", "true");
+      window.location.href = "admin-dashboard.html"; // ✅ redirect
+    } else {
+      alert("Invalid admin credentials");
+    }
+
+    return false;
+  }
+</script>
+
+</body>
+</html>
